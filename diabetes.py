@@ -1,9 +1,14 @@
 import pandas as pd
 import numpy as np
 from numpy import nan
-import matplotlib
+import matplotlib.pyplot as plt
+import seaborn as sns
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.metrics import mean_absolute_error
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+plt.style.use('seaborn-whitegrid')
 
 
 x='./diabetes.csv'
@@ -53,3 +58,36 @@ Normalized_cols = df[cols]
 
 print(df.head())
 
+#corelation
+
+print(df.corr())
+
+X = df['Insulin'].values.reshape(-1, 1)
+
+y = df.Glucose
+
+train_X, val_X, train_y, val_y = train_test_split(X, y, random_state=0)
+
+
+#defining the model
+
+data_model = RandomForestRegressor()
+
+#Fit the model
+
+data_model.fit(train_X, train_y)
+
+# Predict the model
+
+preds_Data = data_model.predict(val_X)
+
+print(preds_Data)
+
+plt.scatter(X, y)
+plt.show()
+
+print(mean_absolute_error(val_y, preds_Data))
+
+accuracy = data_model.score(val_y, preds_Data)
+
+print(accuracy)
