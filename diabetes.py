@@ -64,14 +64,14 @@ print(df.corr())
 
 X = df['Insulin'].values.reshape(-1, 1)
 
-y = df.Glucose
+y = df.Glucose.values.reshape(-1, 1)
 
 train_X, val_X, train_y, val_y = train_test_split(X, y, random_state=0)
 
 
 #defining the model
 
-data_model = RandomForestRegressor()
+data_model = DecisionTreeRegressor()
 
 #Fit the model
 
@@ -83,11 +83,12 @@ preds_Data = data_model.predict(val_X)
 
 print(preds_Data)
 
-plt.scatter(X, y)
-plt.show()
+# plt.scatter(X, y)
+# plt.show()
 
 print(mean_absolute_error(val_y, preds_Data))
 
 accuracy = data_model.score(val_y, preds_Data)
-
 print(accuracy)
+
+# print("The R2 square value for Random Forest Regressor is :", r2_score(val_y, preds_Data)*100)
