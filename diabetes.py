@@ -3,6 +3,7 @@ import numpy as np
 from numpy import nan
 import matplotlib.pyplot as plt
 import seaborn as sns
+import ppscore as pps
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.metrics import mean_absolute_error
 from sklearn.ensemble import RandomForestRegressor
@@ -60,7 +61,7 @@ print(df.head())
 
 #corelation
 
-print(df.corr())
+# print(df.corr())
 
 X = df['Insulin'].values.reshape(-1, 1)
 
@@ -88,7 +89,9 @@ print(preds_Data)
 
 print(mean_absolute_error(val_y, preds_Data))
 
-accuracy = data_model.score(val_y, preds_Data)
-print(accuracy)
+# accuracy = data_model.score(val_y, preds_Data)
+# print(accuracy)
+
+pps.matrix(df, "X")
 
 # print("The R2 square value for Random Forest Regressor is :", r2_score(val_y, preds_Data)*100)
